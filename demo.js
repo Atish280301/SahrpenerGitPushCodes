@@ -1,1 +1,1 @@
-console.log("Demo Sharpener Web Dev Program");
+console.log("I hate Git");
