@@ -26,10 +26,13 @@
       <li class="list-group-item">Item 2</li>
       <li class="list-group-item">Item 3</li>
       <li class="list-group-item">Item 4</li>
+      <li class="lgt">Item 5</li>
     </ul>
    </div>
   </div>
   <script>
+   document.getElementsByClassName("lgt")[0].style.fontWeight = "bold";
+   document.getElementsByTagName("li")[4].style.backgroundColor = "green";
     console.log(document.getElementById("header-title"));
     let header = document.getElementById("header-title");
     let header1 = document.getElementById("main-header");
@@ -45,7 +48,6 @@
     {
         document.getElementsByClassName("list-group-item")[i].style.fontWeight="bold";
     }
-    
     //header.textContent = "Hello";
     //header.innerHTML = "<h3>Web Development</h3>";
     // console.dir(document);
