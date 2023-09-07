@@ -26,28 +26,41 @@
       <li class="list-group-item">Item 2</li>
       <li class="list-group-item">Item 3</li>
       <li class="list-group-item">Item 4</li>
-      <li class="lgt">Item 5</li>
+      <!-- <li class="lgt">Item 5</li> -->
     </ul>
    </div>
   </div>
   <script>
-   document.getElementsByClassName("lgt")[0].style.fontWeight = "bold";
-   document.getElementsByTagName("li")[4].style.backgroundColor = "green";
-    console.log(document.getElementById("header-title"));
-    let header = document.getElementById("header-title");
-    let header1 = document.getElementById("main-header");
-    header.style.border = "solid 3px black"; 
-    header1.style.borderBottom = "solid 3px black"; 
-    document.getElementsByClassName("title")[0].style.fontWeight = "bold";
-    document.getElementsByClassName("title")[0].style.color = "green";
+    // document.querySelector(".list-group-item:nth-child(2)").style.backgroundColor = "green";
+    // document.querySelector(".list-group-item:nth-child(3)").style.display = "none";
 
-    document.getElementsByClassName("list-group-item")[2].style.backgroundColor = "green";
+    let l6 = document.querySelectorAll("li.list-group-item");
+    l6[1].style.color = "green";
 
-    let lst = document.getElementsByClassName("list-group-item");
-    for(let i = 0; i < lst.length; i++)
-    {
-        document.getElementsByClassName("list-group-item")[i].style.fontWeight="bold";
+    let odd = document.querySelectorAll("li:nth-child(odd)");
+    for(let i = 0; i < odd.length; i++){
+        odd[i].style.backgroundColor = "green";
     }
+
+//    document.getElementsByClassName("lgt")[0].style.fontWeight = "bold";
+
+//    document.getElementsByTagName("li")[4].style.backgroundColor = "green";
+
+//     console.log(document.getElementById("header-title"));
+//     let header = document.getElementById("header-title");
+//     let header1 = document.getElementById("main-header");
+//     header.style.border = "solid 3px black"; 
+//     header1.style.borderBottom = "solid 3px black"; 
+//     document.getElementsByClassName("title")[0].style.fontWeight = "bold";
+//     document.getElementsByClassName("title")[0].style.color = "green";
+
+//     document.getElementsByClassName("list-group-item")[2].style.backgroundColor = "green";
+
+//     let lst = document.getElementsByClassName("list-group-item");
+//     for(let i = 0; i < lst.length; i++)
+//     {
+//         document.getElementsByClassName("list-group-item")[i].style.fontWeight="bold";
+//     }
     //header.textContent = "Hello";
     //header.innerHTML = "<h3>Web Development</h3>";
     // console.dir(document);
