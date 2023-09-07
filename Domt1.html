@@ -30,7 +30,6 @@
    </div>
   </div>
   <script>
-
     console.log(document.getElementById("header-title"));
     let header = document.getElementById("header-title");
     let header1 = document.getElementById("main-header");
@@ -38,6 +37,14 @@
     header1.style.borderBottom = "solid 3px black"; 
     document.getElementsByClassName("title")[0].style.fontWeight = "bold";
     document.getElementsByClassName("title")[0].style.color = "green";
+
+    document.getElementsByClassName("list-group-item")[2].style.backgroundColor = "green";
+
+    let lst = document.getElementsByClassName("list-group-item");
+    for(let i = 0; i < lst.length; i++)
+    {
+        document.getElementsByClassName("list-group-item")[i].style.fontWeight="bold";
+    }
     
     //header.textContent = "Hello";
     //header.innerHTML = "<h3>Web Development</h3>";
