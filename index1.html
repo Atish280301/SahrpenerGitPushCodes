@@ -102,8 +102,14 @@ header {
           <label for="email">Email:</label>
           <input type="text" id="email" name="Usermail">
         </div>
+        <div>
+          <label for="phone">Phone Number:</label>
+          <input type="text" id="phone" name="Phonenumber">
+        </div>
         <input class="btn" type="submit" value="Submit">
       </form>
+      <ul id="displayList"></ul>
+
     </section>
   
     <script>
@@ -123,14 +129,42 @@ header {
       // console.log(objDeserialized);
 
       //VERY VERY VERY IMPORTANT TOPIC
+      // function func1(event){
+      //   event.preventDefault();
+      //   let registration = {Usename: event.target.Username.value, UserMail: event.target.Usermail.value};
+        
+      //   let regSerialized = JSON.stringify(registration);
+      //   localStorage.setItem("UserDetails",regSerialized);
+      // }
+
+      //VERY VERY VERY IMPORTANT TOPIC
       function func1(event){
         event.preventDefault();
-        let registration = {Usename: event.target.Username.value, UserMail: event.target.Usermail.value};
+        let username = event.target.Username.value;
+        let usermail = event.target.Usermail.value;
+        let usernumber = event.target.Phonenumber.value;
+
+        let obj = {name: event.target.Username.value, mail: event.target.Usermail.value, number: event.target.Phonenumber.value};
         
-        let regSerialized = JSON.stringify(registration);
-        localStorage.setItem("UserDetails",regSerialized);
+        let objs = JSON.parse(localStorage.getItem(usermail) || '[]');
+        objs.push(obj);
+        localStorage.setItem(usermail,JSON.stringify(objs));
+
+        displayEntries(usermail);
       }
 
+      function displayEntries(usermail) {
+        let ul = document.getElementById("displayList");
+
+// Retrieve the data from localStorage (assuming you have it stored as an array)
+let dataFromLocalStorage = JSON.parse(localStorage.getItem(usermail) || '[]');
+
+dataFromLocalStorage.forEach((entry) => {
+    let li = document.createElement("li");
+    li.textContent = `* Name - ${entry.name}, Email - ${entry.mail}, Phone - ${entry.number}`;
+    ul.appendChild(li);
+});
+      }
     </script>
   </body>
 </html>
