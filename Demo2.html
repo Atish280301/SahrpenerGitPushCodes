@@ -28,8 +28,62 @@
       <li class="list-group-item">Item 3</li>
       <li class="list-group-item">Item 4</li>
     </ul>
+    <span>Demo text</span>
    </div>
   </div>
-
 </body>
+  <script>
+        let itemlist = document.querySelector("#items");
+  itemlist.previousElementSibling.style.color = "green";
+    let newdiv = document.createElement('div');
+    newdiv.className = "Hello";
+    newdiv.id = "hello1";
+    newdiv.setAttribute('title',"Hello Div");
+    newdivtext = document.createTextNode("Hello World");
+    newdiv.appendChild(newdivtext);
+    let cont = document.querySelector('header .container');
+    let head1 = document.querySelector('header h1');
+    cont.insertBefore(newdiv, head1);
+    console.log(newdiv);
+    newdiv.style.fontSize = '30px';
+
+    let newdiv1 = document.createElement('li');
+    newdivtext1 = document.createTextNode("Hello World");
+    newdiv1.appendChild(newdivtext1);
+    console.log(newdiv1);
+    let ul1 = document.getElementById("items");
+    ul1.insertBefore(newdiv1, ul1.children[0]);
+
+    // console.log(itemlist.parentNode);
+    // itemlist.parentNode.style.backgroundColor = "lightgrey";
+    // console.log(itemlist.parentNode.parentNode);
+    // console.log(itemlist.parentNode.parentNode.parentNode);
+
+    // console.log("");
+
+    // console.log(itemlist.parentElement);
+    // itemlist.parentElement.style.backgroundColor = "lightgreen";
+    // console.log(itemlist.parentElement.parentElement);
+    // console.log(itemlist.parentElement.parentElement.parentElement);
+
+    //console.log(itemlist.childNodes);
+    // console.log(itemlist.children);
+    // console.log(itemlist.children[1]);
+    // itemlist.children[1].style.backgroundColor = "yellow";
+
+    // console.log(itemlist.firstElementChild);
+    // itemlist.firstElementChild.textContent = "Hello1";
+
+    // console.log(itemlist.lastChild);
+    // itemlist.lastChild.textContent = "Hello4";
+
+    // console.log(itemlist.lastElementChild);
+    // itemlist.lastElementChild.textContent = "Hello4";
+
+    // console.log(itemlist.nextSibling);
+    // console.log(itemlist.nextElementSibling);
+
+    // console.log(itemlist.previousSibling);
+    // console.log(itemlist.previousElementSibling);    
+  </script>
 </html>
