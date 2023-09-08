@@ -107,12 +107,28 @@ header {
     </section>
   
     <script>
+      // function func1(event){
+      //   event.preventDefault();
+      //   let uname = event.target.Username.value;
+      //   let umail = event.target.Usermail.value;
+      //   localStorage.setItem("UserName",uname);
+      //   localStorage.setItem("UserMail",umail);
+      // }
+
+      //VERY VERY VERY IMPORTANT TOPIC
+      // let object1 = {name: "Web Development", age: 22};
+      // let objSerialized = JSON.stringify(object1);
+      // localStorage.setItem("Detail",objSerialized);
+      // let objDeserialized = JSON.parse(localStorage.getItem("Detail"));
+      // console.log(objDeserialized);
+
+      //VERY VERY VERY IMPORTANT TOPIC
       function func1(event){
         event.preventDefault();
-        let uname = event.target.Username.value;
-        let umail = event.target.Usermail.value;
-        localStorage.setItem("UserName",uname);
-        localStorage.setItem("UserMail",umail);
+        let registration = {Usename: event.target.Username.value, UserMail: event.target.Usermail.value};
+        
+        let regSerialized = JSON.stringify(registration);
+        localStorage.setItem("UserDetails",regSerialized);
       }
 
     </script>
