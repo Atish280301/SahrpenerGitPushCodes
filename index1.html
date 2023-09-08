@@ -152,16 +152,29 @@ header {
 
         displayEntries(usermail);
       }
-
+      //function to add data on the browser.
       function displayEntries(usermail) {
         let ul = document.getElementById("displayList");
 
-// Retrieve the data from localStorage (assuming you have it stored as an array)
+// Retrieve the data from localStorage (assuming you have it stored as an array) delee the data from browser and local storage
 let dataFromLocalStorage = JSON.parse(localStorage.getItem(usermail) || '[]');
 
 dataFromLocalStorage.forEach((entry) => {
     let li = document.createElement("li");
     li.textContent = `* Name - ${entry.name}, Email - ${entry.mail}, Phone - ${entry.number}`;
+
+    let delbutton = document.createElement('button');
+    delbutton.textContent = "Delete";
+    delbutton.addEventListener("click",() =>{
+      let index = Array.from(ul.children).indexOf(li);
+      // Remove the corresponding data entry from localStorage
+      dataFromLocalStorage.splice(index, 1);
+        localStorage.removeItem(usermail, JSON.stringify(dataFromLocalStorage));
+
+        // Remove the <li> element from the DOM
+        ul.removeChild(li);
+    })
+    li.appendChild(delbutton);
     ul.appendChild(li);
 });
       }
