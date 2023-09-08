@@ -149,9 +149,15 @@ header {
         let objs = JSON.parse(localStorage.getItem(usermail) || '[]');
         objs.push(obj);
         localStorage.setItem(usermail,JSON.stringify(objs));
-
+        let usrnm = document.getElementById("name");
+        usrnm.value = "";
+        let usrmil = document.getElementById('email');
+        usrmil.value = "";
+        let usrnum = document.getElementById('phone');
+        usrnum.value = "";
         displayEntries(usermail);
       }
+
       //function to add data on the browser.
       function displayEntries(usermail) {
         let ul = document.getElementById("displayList");
@@ -163,6 +169,7 @@ dataFromLocalStorage.forEach((entry) => {
     let li = document.createElement("li");
     li.textContent = `* Name - ${entry.name}, Email - ${entry.mail}, Phone - ${entry.number}`;
 
+    //delete button
     let delbutton = document.createElement('button');
     delbutton.textContent = "Delete";
     delbutton.addEventListener("click",() =>{
@@ -173,8 +180,28 @@ dataFromLocalStorage.forEach((entry) => {
 
         // Remove the <li> element from the DOM
         ul.removeChild(li);
-    })
+    });
+
+    //edit button
+    let editbtn = document.createElement('button');
+    editbtn.textContent = "Edit";
+    editbtn.addEventListener("click",()=>{
+      let index = Array.from(ul.children).indexOf(li);
+      // Remove the corresponding data entry from localStorage
+      dataFromLocalStorage.splice(index, 1);
+        localStorage.removeItem(usermail, JSON.stringify(dataFromLocalStorage));
+        let usrnm1 = document.getElementById("name");
+        usrnm1.value = entry.name;
+        let usrmil1 = document.getElementById('email');
+        usrmil1.value = entry.mail;
+        let usrnum1 = document.getElementById('phone');
+        usrnum1.value = entry.number;
+      
+        // Remove the <li> element from the DOM
+        ul.removeChild(li);
+    });
     li.appendChild(delbutton);
+    li.appendChild(editbtn);
     ul.appendChild(li);
 });
       }
