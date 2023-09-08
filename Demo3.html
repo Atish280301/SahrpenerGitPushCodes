@@ -25,14 +25,15 @@
         <h2 class="title">Add Items</h2>
         <form id="addForm" class="form-inline mb-3">
           <input type="text" class="form-control mr-2" id="item">
+          <input type="text" class="form-control mr-2" id="desc">
           <input type="submit" class="btn btn-dark" value="Submit">
         </form>
         <h2 class="title">Items</h2>
         <ul id="items" class="list-group">
-          <li class="list-group-item">Item 1 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-danger btn-sm float-right delete">Edit</button></li>
-          <li class="list-group-item">Item 2 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-danger btn-sm float-right delete">Edit</button></li>
-          <li class="list-group-item">Item 3 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-danger btn-sm float-right delete">Edit</button></li>
-          <li class="list-group-item">Item 4 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-danger btn-sm float-right delete">Edit</button></li>
+          <li class="list-group-item">Item 1 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-edit btn-sm float-right edit">Edit</button></li>
+          <li class="list-group-item">Item 2 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-edit btn-sm float-right edit">Edit</button></li>
+          <li class="list-group-item">Item 3 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-edit btn-sm float-right edit">Edit</button></li>
+          <li class="list-group-item">Item 4 <button class="btn btn-danger btn-sm float-right delete">X</button><button class="btn btn-edit btn-sm float-right edit">Edit</button></li>
         </ul>
        </div>
       </div>
@@ -48,6 +49,8 @@ itemList.addEventListener('click', removeItem);
 // Filter event
 filter.addEventListener('keyup', filterItems);
 
+ filter.addEventListener('keyup', filterItems1);
+
 // Add item
 function addItem(e){
   e.preventDefault();
@@ -55,12 +58,19 @@ function addItem(e){
   // Get input value
   var newItem = document.getElementById('item').value;
 
+  //get Description value
+  var newdes = document.getElementById('desc').value;
+
   // Create new li element
   var li = document.createElement('li');
   // Add class
   li.className = 'list-group-item';
   // Add text node with input value
   li.appendChild(document.createTextNode(newItem));
+  
+  //Add Description
+  li.appendChild(document.createTextNode(newdes));
+
 
   // Create del button element
   var deleteBtn = document.createElement('button');
@@ -76,7 +86,7 @@ function addItem(e){
 
     //Edit Button
     var editbtn = document.createElement('button');
-    editbtn.className = 'btn btn-danger btn-sm float-right delete';
+    editbtn.className = 'btn btn-edit btn-sm float-right edit';
     editbtn.appendChild(document.createTextNode('Edit'));
     li.appendChild(editbtn);
 
@@ -104,6 +114,25 @@ function filterItems(e){
   Array.from(items).forEach(function(item){
     var itemName = item.firstChild.textContent;
     if(itemName.toLowerCase().indexOf(text) != -1){
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+// Filter Items
+function filterItems1(e){
+  // convert text to lowercase
+ var text = e.target.value.toLowerCase();
+  // Get lis
+  var items = itemList.getElementsByTagName('li');
+  // Convert to an array
+  Array.from(items).forEach(function(item){
+    var itemName = item.firstChild.textContent;
+    var itemDes = item.childNodes[1].textContent; // Use childNodes to get the description text
+
+    // Check if either the item name or description contains the filter text
+    if(itemName.toLowerCase().indexOf(text) != -1 || itemDes.toLowerCase().indexOf(text) != -1){
       item.style.display = 'block';
     } else {
       item.style.display = 'none';
