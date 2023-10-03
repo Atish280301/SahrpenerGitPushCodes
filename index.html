@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        :root::-webkit-scrollbar{display: none;}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    user-select: none;
+}
+body{
+    height: 100vh;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+.hed1{
+    display: flex;
+    justify-content: center;
+    font-size: 3rem;
+}
+.frm{
+    border: 2px solid rgb(0, 0, 0);
+    margin-top: 40px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 15px;
+}
+.part{
+    border: 2px solid rgb(0, 0, 0);
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+    padding: 10px;
+    border-radius: 15px;
+}
+.lbl{
+    font-size: 15px;
+}
+.lbl1{font-size: 15px;}
+.fcs{
+    font-size: 15px;
+    padding: 7px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    outline: 2px solid rgb(0, 0, 0);
+}
+.bd{
+    width: 230px;
+    padding: 5px;
+}
+.sbtn{
+    margin: 20px;
+    width: 97%;
+    height: 30px;
+    border-radius: 15px;
+    border: 2px solid rgb(227, 104, 104);
+    background-color: rgb(227, 104, 104);
+    transition: all ease 0.2s;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.sbtn:active{
+    scale: 0.99;
+}
+#unls{
+    border: 2px solid rgb(0, 0, 0);
+    margin: 40px 100px 40px 100px;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    height: 200px;
+}
+#unls::-webkit-scrollbar{display: none;}
+.LI{
+    border: 2px solid rgb(0, 0, 0);
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.PLI{
+    width: 50%;
+}
+.edt{
+    width: 10%;
+    border-radius: 5px;
+    border: 2px solid rgb(227, 104, 104);
+    background-color: rgb(227, 104, 104);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.dlt{
+    width: 10%;
+    border-radius: 5px;
+    border: 2px solid rgb(227, 104, 104);
+    background-color: rgb(227, 104, 104);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+    </style>
+    <title>Atish Kumar Sahu Project01</title>
+</head>
+<body>
+    <!-- head one -->
+    <div class="hed1">
+        Sharpener Assignment
+    </div>
+    <!-- heading -->
+    <!-- form -->
+    <div class="frm">
+        <form id="MyForm" onsubmit="addItem(); return false;">
+            <div class="part">
+                <label for="fullname" class="lbl">Expense Amount: </label><br>
+                <input type="text" id="FN" class="Fcls p1 fcs" name="Fullname"><br>
+
+                <label for="user-mail" class="lbl">Description:</label><br>
+                <input type="mail" id="ML" class="Fcls p1 fcs" name="Mail"><br>
+
+                <label for="branch" class="lbl">Category:</label><br>
+                <select name="Branch" id="brc" class="Fcls p1 fcs bd">
+                    <option hidden>Option</option>
+                    <option value="Category 01">Category 1</option>
+                    <option value="Category 02">Category 2</option>
+                    <option value="Category 03">Category 3</option>
+                    <option value="Category 04">Category 4</option>
+                </select>
+            </div>
+            <input type="submit" value="Submit" class="sbtn">
+        </form>
+    </div>
+    <ul id="unls">
+        <li class="LI">
+            <p class="PLI">
+                5000 Item 01 Category 01
+            </p>
+            <button class="edt" onclick="editItem(this)">Edit</button>
+            <button class="dlt" onclick="deleteItem(this)">Delete</button>
+        </li>
+        <li class="LI">
+            <p class="PLI">
+                6000 Item 02 Category 02
+            </p>
+            <button class="edt" onclick="editItem(this)">Edit</button>
+            <button class="dlt" onclick="deleteItem(this)">Delete</button>
+        </li>
+        <li class="LI">
+            <p class="PLI">
+                7000 Item 03 Category 03
+            </p>
+            <button class="edt" onclick="editItem(this)">Edit</button>
+            <button class="dlt" onclick="deleteItem(this)">Delete</button>
+        </li>
+    </ul>
+    <script>
+        // Function to add a new item
+function addItem() {
+    // Get the values from the form fields
+    var expenseAmount = document.getElementById('FN').value;
+    var description = document.getElementById('ML').value;
+    var category = document.getElementById('brc').value;
+
+    // Create a new <li> element
+    var newItem = document.createElement('li');
+    newItem.className = 'LI';
+
+    // Create a <p> element for the item text
+    var itemText = document.createElement('p');
+    itemText.className = 'PLI';
+    itemText.textContent = expenseAmount + ' ' + description + ' ' + category;
+
+    // Create Edit and Delete buttons
+    var editButton = document.createElement('button');
+    editButton.className = 'edt';
+    editButton.textContent = 'Edit';
+    editButton.onclick = function() { editItem(this); };
+
+    var deleteButton = document.createElement('button');
+    deleteButton.className = 'dlt';
+    deleteButton.textContent = 'Delete';
+    deleteButton.onclick = function() { deleteItem(this); };
+
+    // Append the <p> element and buttons to the <li> element
+    newItem.appendChild(itemText);
+    newItem.appendChild(editButton);
+    newItem.appendChild(deleteButton);
+
+    // Append the <li> element to the <ul> element
+    var itemList = document.getElementById('unls');
+    itemList.appendChild(newItem);
+
+    // Clear the form fields after adding the item
+    document.getElementById('FN').value = '';
+    document.getElementById('ML').value = '';
+    document.getElementById('brc').value = 'Option';
+
+    // Store the item data in local storage
+    var items = JSON.parse(localStorage.getItem('items')) || [];
+    var newItemData = {
+        expenseAmount: expenseAmount,
+        description: description,
+        category: category
+    };
+    items.push(newItemData);
+    localStorage.setItem('items', JSON.stringify(items));
+}
+function deleteItem(button) {
+    // Get the parent <li> element
+    var listItem = button.parentElement;
+
+    // Remove the <li> element from the <ul>
+    listItem.parentNode.removeChild(listItem);
+
+    // Get the text content of the item for deleting
+    var itemText = listItem.querySelector('.PLI').textContent;
+
+    // Retrieve the existing items from local storage
+    var items = JSON.parse(localStorage.getItem('items')) || [];
+
+    // Find and remove the item from the local storage array
+    var updatedItems = items.filter(function(item) {
+        return item.expenseAmount + ' ' + item.description + ' ' + item.category !== itemText.trim();
+    });
+
+    localStorage.setItem('items', JSON.stringify(updatedItems));
+}
+function editItem(button) {
+// Get the parent <li> element
+    var listItem = button.parentElement;
+
+    // Get the text content of the item for editing
+    var itemText = listItem.querySelector('.PLI').textContent;
+
+    // Split the item text into parts based on spaces
+    var parts = itemText.split(' ');
+
+    // Extract the expense amount, description, and category
+    var expenseAmount = parts[0];
+    var description = parts.slice(1, -2).join(' ');
+    var category = parts.slice(-2, -1).join(' ');
+
+    // Remove the item from local storage
+    removeFromLocalStorage(expenseAmount, description, category);
+
+    // Populate the form fields with the extracted values
+    var frname = document.getElementById('FN');
+    frname.value = expenseAmount;
+
+    var usrmail = document.getElementById('ML');
+    usrmail.value = description;
+
+    var brch = document.getElementById('brc');
+    
+    // Iterate through the select options and set the selected option based on category
+    for (var i = 0; i < brch.options.length; i++) {
+        if (brch.options[i].value === category) {
+            brch.selectedIndex = i;
+            break;
+        }
+    }
+}
+function removeFromLocalStorage(expenseAmount, description, category) {
+    // Retrieve the existing items from local storage
+    var items = JSON.parse(localStorage.getItem('items')) || [];
+
+    // Find and remove the item from the local storage array
+    var updatedItems = items.filter(function(item) {
+        return (
+            item.expenseAmount !== expenseAmount ||
+            item.description !== description ||
+            item.category !== category
+        );
+    });
+
+    localStorage.setItem('items', JSON.stringify(updatedItems));
+}
+    </script>
+</body>
+</html>
