@@ -121,13 +121,13 @@ body{
         <form id="MyForm" onsubmit="addItem(); return false;">
             <div class="part">
                 <label for="fullname" class="lbl">Expense Amount: </label><br>
-                <input type="text" id="FN" class="Fcls fcs" name="Fullname"><br>
+                <input type="text" id="FN" class="Fcls p1 fcs" name="Fullname"><br>
 
                 <label for="user-mail" class="lbl">Description:</label><br>
-                <input type="mail" id="ML" class="Fcls fcs" name="Mail"><br>
+                <input type="mail" id="ML" class="Fcls p1 fcs" name="Mail"><br>
 
                 <label for="branch" class="lbl">Category:</label><br>
-                <select name="Branch" id="brc" class="Fcls bd">
+                <select name="Branch" id="brc" class="Fcls p1 fcs bd">
                     <option hidden>Option</option>
                     <option value="Category 01">Category 1</option>
                     <option value="Category 02">Category 2</option>
@@ -259,7 +259,7 @@ function editItem(button) {
     usrmail.value = description;
 
     var brch = document.getElementById('brc');
-    
+
     // Iterate through the select options and set the selected option based on category
     for (var i = 0; i < brch.options.length; i++) {
         if (brch.options[i].value === category) {
