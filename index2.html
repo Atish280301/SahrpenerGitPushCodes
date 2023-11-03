@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <style>
+        .head{
+            margin: 5vw;
+        }
+        .form-control{
+            height: 30px;
+        }
+        .chs{
+            height: 50px;
+        }
+        .list{
+            margin: 5vw;
+        }
+    </style>sss
+    <title>Document Important For To Do List Don't Share</title>
+</head>
+<body>
+    <div class="head">
+        <form class="row g-3" id="addForm">
+            <div class="col-md-2">
+              <label for="expenceamount" class="form-label">Expence Amount:</label>
+              <input type="text" class="form-control" id="one">
+            </div>
+            <div class="col-md-2">
+                <label for="description" class="form-label">Description:</label>
+                <input type="text" class="form-control" id="two">
+              </div>
+           
+            <div class="col-md-2">
+              <label for="category" class="form-label">Category:</label><br>
+              <select id="inputState" class="form-control">
+                <option hidden>Choose...</option>
+                <option value="Option1">Option1</option>
+                <option value="Option2">Option2</option>
+                <option value="Option3">Option3</option>
+                <option value="Option4">Option4</option>
+              </select>
+            </div>
+           
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+    </div>
+    <div class="list">
+        <ul id="items" class="list-group">
+            <li class="list-group-item">1000 user1 Option2<button class="btn btn-danger btn-sm float-right delete" onclick="delitem()">Delete</button><button class="btn btn-edit btn-sm float-right edit" onclick="edtitem()">Edit</button></li>
+
+            <li class="list-group-item">2000 user2 Option2<button class="btn btn-danger btn-sm float-right delete" onclick="delitem()">Delete</button><button class="btn btn-edit btn-sm float-right edit" onclick="edtitem()">Edit</button></li>
+
+            <li class="list-group-item">3000 user3 Option3<button class="btn btn-danger btn-sm float-right delete" onclick="delitem()">Delete</button><button class="btn btn-edit btn-sm float-right edit" onclick="edtitem()">Edit</button></li>
+
+            <li class="list-group-item">4000 user4 Option4<button class="btn btn-danger btn-sm float-right delete" onclick="delitem()">Delete</button><button class="btn btn-edit btn-sm float-right edit" onclick="edtitem()">Edit</button></li>
+          </ul>
+    </div>
+<script>
+  let form = document.getElementById('addForm');
+  let itemlist = document.getElementById('items');
+
+  // Add an event listener to the form submit
+  form.addEventListener('submit', addItem);
+
+  // Load items from local storage when the page loads
+  window.onload = function() {
+    loadItemsFromLocalStorage();
+  }
+
+  /* Add Item */
+  function addItem(e){
+    e.preventDefault();
+    let newitem = document.getElementById('one').value;
+    let newdes = document.getElementById('two').value;
+    let newopt = document.getElementById('inputState').value;
+
+    // Create a new list item
+    let li = document.createElement('li');
+    li.className = 'list-group-item';
+    li.appendChild(document.createTextNode(newitem));
+    li.appendChild(document.createTextNode(" " + newdes));
+    li.appendChild(document.createTextNode(" " + newopt));
+
+    // Add delete button
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    deleteBtn.appendChild(document.createTextNode('Delete'));
+    li.appendChild(deleteBtn);
+
+    // Add Edit button
+    var editbtn = document.createElement('button');
+    editbtn.className = 'btn btn-edit btn-sm float-right edit';
+    editbtn.appendChild(document.createTextNode('Edit'));
+    li.appendChild(editbtn);
+
+    let itemData = {
+      newitem: newitem,
+      newdes: newdes,
+      newopt: newopt
+    };
+
+    // Store the item data in local storage using the description as the key
+    localStorage.setItem(newdes, JSON.stringify(itemData));
+
+    // Append li to the list
+    itemlist.appendChild(li);
+
+    // Clear form fields
+    document.getElementById('one').value = "";
+    document.getElementById('two').value = "";
+    document.getElementById('inputState').value = "Choose...";
+
+    // Refresh the page to display updated data
+    location.reload();
+  }
+
+  // Load items from local storage and display them
+  function loadItemsFromLocalStorage() {
+    for (let key in localStorage) {
+      if (localStorage.hasOwnProperty(key)) {
+        let itemData = JSON.parse(localStorage.getItem(key));
+        addItemToUI(itemData);
+      }
+    }
+  }
+
+  // Add an item to the UI
+  function addItemToUI(itemData) {
+    let li = document.createElement('li');
+    li.className = 'list-group-item';
+    li.appendChild(document.createTextNode(itemData.newitem));
+    li.appendChild(document.createTextNode(" " + itemData.newdes));
+    li.appendChild(document.createTextNode(" " + itemData.newopt));
+
+    // Add delete button
+    var deleteBtn = document.createElement('button');
+    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
+    deleteBtn.addEventListener('click', function(){
+      let itemDescription = itemData.newdes; // Get the description from itemData
+  delitem(itemDescription);
+    })
+    deleteBtn.appendChild(document.createTextNode('Delete'));
+    li.appendChild(deleteBtn);
+
+    // Add Edit button
+    var editbtn = document.createElement('button');
+    editbtn.className = 'btn btn-edit btn-sm float-right edit';
+    editbtn.appendChild(document.createTextNode('Edit'));
+    li.appendChild(editbtn);
+
+    // Append li to the list
+    itemlist.appendChild(li);
+  }
+  // Define the delitem function
+function delitem(itemDescription) {
+  // Find the parent list item of the clicked delete button
+
+  localStorage.removeItem(itemDescription);
+  let listItem = event.target.parentElement;
+
+  // Extract the text content of the list item
+  let itemText = listItem.textContent.trim();
+
+  // Remove the item from the list
+  itemlist.removeChild(listItem);
+
+  // Remove the item from local storage using the description as the key
+  localStorage.removeItem(itemDescription);
+}
+</script>
+</body>
+</html>
